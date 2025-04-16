@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-dw1&n9_t%w%cnxn!l&9&-&@s-=&rd_vi16(1@5b85s-0ai^lm9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['ngawa-solutions-3bk2.onrender.com','localhost']
 
 
 # Application definition
@@ -136,3 +137,14 @@ MEDIA_ROOT=BASE_DIR / 'media'
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+# Security Settings (Add to bottom of settings.py)
+SECURE_HSTS_SECONDS = 30 * 24 * 60 * 60  # 1 year in seconds
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP → HTTPS
+SESSION_COOKIE_SECURE = True  # Only send session cookies over HTTPS
+CSRF_COOKIE_SECURE = True  # Only send CSRF cookies over HTTPS
+
+
+# Generate a new SECRET_KEY (see step 2)
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')  # Recommended: 50+ chars
