@@ -3,4 +3,4 @@ gunicorn==21.2.0
 whitenoise==6.5.0
 psycopg2-binary==2.9.7  # For PostgreSQL
 python-dotenv==1.0.0 
-device-detector==5.0.0
+device-detector==5.0.1
