@@ -2,10 +2,11 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import ContactMessage, Products
 from django.contrib import messages
 import base64
+from .utils import get_device_type
 
 # Create your views here.
 def home(request):
-    if request.user_agent.is_mobile:
+    if device_type=='mobile':
         return render(request,'core/mobile_home.html')
         
     else:return render(request, 'core/home.html')
@@ -22,7 +23,7 @@ def contact(request):
             return redirect('contact')
         else:
             message.error(request,'Please fill all the fields')
-    if request.user_agent.is_mobile:
+    if device_type=='mobile':
         template='core/mobile_contact.html'
     else:
         template='core/contact.html'
@@ -42,7 +43,7 @@ def shop(request):
 
     products=Products.objects.filter(category=category) if category else Products.objects.all()
     
-    if request.user_agent.is_mobile:
+    if device_type=='mobile':
         template='core/mobile_shop.html'
     else:
         template='core/shop.html'
@@ -54,14 +55,14 @@ def shop(request):
 
 def product_details(request,slug):
     product=get_object_or_404(Products,slug=slug)
-    if request.user_agent.is_mobile:
+    if device_type=='mobile':
         template='core/mobile_product_details.html'
     else:
         template='core/product_details.html'
     return render(request,template,{'product':product})
 
 def about_us(request):
-    if request.user_agent.is_mobile:
+    if device_type=='mobile':
         return render(request, 'core/mobile_about_us.html')
     else:
         return render(request, 'core/about_us.html')
