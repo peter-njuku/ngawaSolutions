@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'ngawa.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+DATABASE_URL='postgresql://ngawa_29f4_user:uWuBzFrfKR6WtQzBmsHyFP2yj37JlMhe@dpg-cvvphvre5dus73ch9hm0-a.singapore-postgres.render.com/ngawa_29f4'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
