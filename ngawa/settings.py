@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv()
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,14 +25,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dw1&n9_t%w%cnxn!l&9&-&@s-=&rd_vi16(1@5b85s-0ai^lm9'
-
+#SECRET_KEY = 'django-insecure-dw1&n9_t%w%cnxn!l&9&-&@s-=&rd_vi16(1@5b85s-0ai^lm9'
+SECRET_KEY = os.environ.get('SECRET_KEY','vw(_9wr)+t=h%7%6@r#qjtqpa@$rqh+#d8+w^p*9e3r)*y1&bq')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['ngawa-solutions-3bk2.onrender.com','localhost']
+ALLOWED_HOSTS = []
 
-
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 # Application definition
 
 INSTALLED_APPS = [
